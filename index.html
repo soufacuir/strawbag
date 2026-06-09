@@ -10,6 +10,8 @@
   <meta property="og:image" content="./assets/photo-1.webp">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://strawbag.pages.dev/">
+  <link rel="canonical" href="https://strawbag.pages.dev/">
   <title>Paille & Soleil 🇲🇦 – Sacs & Chapeaux en Paille | Artisanat Marocain</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1260,6 +1262,10 @@
 </div>
 
 <script>
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (window.location.hash) history.replaceState(null, '', window.location.pathname + window.location.search);
+  window.scrollTo(0, 0);
+
   // ─── COLOR PICKER SWITCHER ───
   function updateColorPickers() {
     const pack = document.querySelector('input[name="pack"]:checked');
