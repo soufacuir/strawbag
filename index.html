@@ -7,7 +7,7 @@
   <meta name="keywords" content="sac paille maroc, chapeau paille, artisanat marocain, sac été, accessoires plage">
   <meta property="og:title" content="Paille & Soleil – Sacs & Chapeaux Artisanaux 🇲🇦">
   <meta property="og:description" content="Découvrez nos sacs et chapeaux en paille artisanaux. Livraison gratuite partout au Maroc. Paiement à la livraison.">
-  <meta property="og:image" content="./assets/photo-1.webp">
+  <meta property="og:image" content="https://strawbag.pages.dev/assets/photo-1.webp">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:url" content="https://strawbag.pages.dev/">
@@ -15,29 +15,14 @@
   <title>Paille & Soleil 🇲🇦 – Sacs & Chapeaux en Paille | Artisanat Marocain</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="dns-prefetch" href="https://connect.facebook.net">
+  <link rel="dns-prefetch" href="https://analytics.tiktok.com">
+  <link rel="preload" as="image" href="./assets/photo-1.webp" fetchpriority="high">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 
-  <!-- Facebook Pixel -->
-  <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-    document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '981839400957716');
-    fbq('track', 'PageView');
-  </script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=981839400957716&ev=PageView&noscript=1"/></noscript>
-
-  <!-- TikTok Pixel -->
-  <script>
-    !function (w, d, t) {
-      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-      ttq.load('D7PS3TJC77U471PH3140');
-      ttq.page();
-    }(window, document, 'ttq');
-  </script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -612,7 +597,7 @@
 
 <!-- Hero -->
 <section class="hero" aria-labelledby="hero-heading">
-  <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/photo-1.webp" aria-hidden="true">
     <source src="./assets/product-video.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay" aria-hidden="true"></div>
@@ -1266,6 +1251,18 @@
   if (window.location.hash) history.replaceState(null, '', window.location.pathname + window.location.search);
   window.scrollTo(0, 0);
 
+  // ─── VIDEO AUTOPLAY ───
+  (function() {
+    var vid = document.querySelector('.hero-video');
+    if (!vid) return;
+    function tryPlay() { if (vid.paused) { vid.muted = true; vid.play().catch(function(){}); } }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tryPlay);
+    else tryPlay();
+    window.addEventListener('load', tryPlay);
+    document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+    document.addEventListener('scroll', tryPlay, { once: true, passive: true });
+  })();
+
   // ─── COLOR PICKER SWITCHER ───
   function updateColorPickers() {
     const pack = document.querySelector('input[name="pack"]:checked');
@@ -1521,6 +1518,15 @@
       setTimeout(showSocialProof, delay);
     }, 45000);
   }, 8000);
+</script>
+
+<script>
+  window.addEventListener('load', function() {
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','981839400957716');
+    fbq('track','PageView');
+    !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=d.createElement("script");n.type="text/javascript";n.async=!0;n.src=r+"?sdkid="+e+"&lib="+t;e=d.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};ttq.load('D7PS3TJC77U471PH3140');ttq.page();}(window,document,'ttq');
+  }, {once: true});
 </script>
 </body>
 </html>
