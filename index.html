@@ -274,11 +274,15 @@
     }
     .trust-item {
       position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       display: flex;
       align-items: center;
       gap: 12px;
       opacity: 0;
       transition: opacity 0.5s ease;
+      white-space: nowrap;
     }
     .trust-item.is-active { opacity: 1; }
     .trust-icon {
@@ -1707,22 +1711,27 @@
 
   // ─── OFFER COUNTDOWN ───
   (function() {
-    var DURATION = 2 * 60 * 60; // 2 hours in seconds
+    var DURATION = 2 * 60 * 60;
     var KEY = 'ps_offer_start';
     var el = document.getElementById('trust-countdown');
     if (!el) return;
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
     function getStart() {
-      var stored = localStorage.getItem(KEY);
-      if (stored) { var t = parseInt(stored, 10); if (!isNaN(t)) return t; }
-      var now = Date.now();
-      localStorage.setItem(KEY, now);
-      return now;
+      try {
+        var stored = localStorage.getItem(KEY);
+        if (stored) { var t = parseInt(stored, 10); if (!isNaN(t)) return t; }
+        var now = Date.now();
+        localStorage.setItem(KEY, now);
+        return now;
+      } catch(e) { return Date.now(); }
     }
-    function pad(n) { return String(n).padStart(2, '0'); }
     function tick() {
       var elapsed = Math.floor((Date.now() - getStart()) / 1000);
       var remaining = DURATION - (elapsed % DURATION);
-      el.textContent = pad(Math.floor(remaining / 3600)) + ':' + pad(Math.floor((remaining % 3600) / 60)) + ':' + pad(remaining % 60);
+      var h = Math.floor(remaining / 3600);
+      var m = Math.floor((remaining % 3600) / 60);
+      var s = remaining % 60;
+      el.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
     }
     tick();
     setInterval(tick, 1000);
