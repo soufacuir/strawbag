@@ -1738,15 +1738,29 @@
   })();
 
   // ─── TRUST SECTION CYCLING ───
+  // Starts only when trust bar enters viewport so countdown is always the first badge seen
   (function() {
     var items = document.querySelectorAll('.trust-item');
     if (!items.length) return;
     var cur = 0;
-    setInterval(function() {
-      items[cur].classList.remove('is-active');
-      cur = (cur + 1) % items.length;
-      items[cur].classList.add('is-active');
-    }, 3000);
+    var started = false;
+    function startCycling() {
+      if (started) return;
+      started = true;
+      setInterval(function() {
+        items[cur].classList.remove('is-active');
+        cur = (cur + 1) % items.length;
+        items[cur].classList.add('is-active');
+      }, 3000);
+    }
+    var bar = document.querySelector('.trust-bar');
+    if (bar && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries, obs) {
+        if (entries[0].isIntersecting) { startCycling(); obs.disconnect(); }
+      }, { threshold: 0.5 }).observe(bar);
+    } else {
+      startCycling();
+    }
   })();
 
   // First popup at 8s, then random 30–45s intervals
