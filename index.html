@@ -289,6 +289,7 @@
     .trust-icon svg { width: 18px; height: 18px; color: var(--brown); }
     .trust-name { font-size: 14px; font-weight: 700; color: var(--white); }
     .trust-desc { font-size: 12px; color: var(--gold-light); margin-top: 2px; }
+    #trust-countdown { font-weight: 700; font-size: 13px; letter-spacing: 0.5px; font-variant-numeric: tabular-nums; }
     @media (prefers-reduced-motion: reduce) {
       .trust-item { transition: none; }
     }
@@ -769,6 +770,12 @@
 <div class="trust-bar" role="region" aria-label="Garanties">
   <div class="trust-items">
     <div class="trust-item is-active">
+      <div class="trust-icon" aria-hidden="true">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div><div class="trust-name">Offre se termine dans :</div><div class="trust-desc" id="trust-countdown">--:--:--</div></div>
+    </div>
+    <div class="trust-item">
       <div class="trust-icon" aria-hidden="true">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
       </div>
@@ -1696,6 +1703,29 @@
       cur = (cur + 1) % items.length;
       items[cur].classList.add('is-active');
     }, 3000);
+  })();
+
+  // ─── OFFER COUNTDOWN ───
+  (function() {
+    var DURATION = 2 * 60 * 60; // 2 hours in seconds
+    var KEY = 'ps_offer_start';
+    var el = document.getElementById('trust-countdown');
+    if (!el) return;
+    function getStart() {
+      var stored = localStorage.getItem(KEY);
+      if (stored) { var t = parseInt(stored, 10); if (!isNaN(t)) return t; }
+      var now = Date.now();
+      localStorage.setItem(KEY, now);
+      return now;
+    }
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function tick() {
+      var elapsed = Math.floor((Date.now() - getStart()) / 1000);
+      var remaining = DURATION - (elapsed % DURATION);
+      el.textContent = pad(Math.floor(remaining / 3600)) + ':' + pad(Math.floor((remaining % 3600) / 60)) + ':' + pad(remaining % 60);
+    }
+    tick();
+    setInterval(tick, 1000);
   })();
 
   // ─── TRUST SECTION CYCLING ───
