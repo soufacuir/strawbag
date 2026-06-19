@@ -70,6 +70,7 @@
     .promo-bar-sep { color: var(--gold); font-weight: 400; }
     .promo-bar-cta { color: var(--gold); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; transition: color 0.2s; }
     .promo-bar-cta:hover { color: var(--gold-light); }
+    .promo-countdown { color: var(--gold); font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: 0.5px; }
 
     /* ─── HEADER ─── */
     header {
@@ -621,11 +622,9 @@
 <body>
 
 <!-- Promo Bar -->
-<div class="promo-bar" role="region" aria-label="Offre limitée">
+<div class="promo-bar" role="region" aria-label="Offre limitée — minuteur de compte à rebours">
   <p class="promo-bar-msg">
-    ⚡ Offre limitée — Stock bientôt épuisé
-    <span class="promo-bar-sep" aria-hidden="true">|</span>
-    <a href="#commander" class="promo-bar-cta">NOUVEAUTÉ ÉTÉ 2026</a>
+    ⚡ OFFRE LIMITÉE — Se termine dans :&nbsp;<span id="promo-countdown" class="promo-countdown" aria-live="off">--J --H --M --S</span>
   </p>
 </div>
 
@@ -1524,6 +1523,37 @@
     document.getElementById('form-container').style.display = 'block';
     document.getElementById('pack-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
+  // ─── PROMO COUNTDOWN ───
+  (function() {
+    var DURATION_MS = 48 * 60 * 60 * 1000; // 48 hours
+    var KEY = 'sb_promo_end';
+
+    function getOrCreateEnd() {
+      var v = parseInt(localStorage.getItem(KEY), 10);
+      if (!v || v <= Date.now()) {
+        v = Date.now() + DURATION_MS;
+        localStorage.setItem(KEY, v);
+      }
+      return v;
+    }
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function tick() {
+      var el = document.getElementById('promo-countdown');
+      if (!el) return;
+      var rem = Math.max(0, Math.floor((getOrCreateEnd() - Date.now()) / 1000));
+      var d = Math.floor(rem / 86400);
+      var h = Math.floor((rem % 86400) / 3600);
+      var m = Math.floor((rem % 3600) / 60);
+      var s = rem % 60;
+      el.textContent = pad(d) + 'J ' + pad(h) + 'H ' + pad(m) + 'M ' + pad(s) + 'S';
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
 
   // ─── SOCIAL PROOF POPUP ───
   const spData = [
