@@ -310,24 +310,21 @@
     .order-section .section-desc { color: rgba(255,255,255,0.7); }
     .order-wrapper { max-width: 680px; margin: 0 auto; }
     /* ─── TRUST STRIP (below hero) ─── */
-    .trust-strip { background: var(--brown); padding: 14px 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-    .trust-pill { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.07); border-radius: 100px; padding: 8px 16px; }
+    .trust-strip { background: var(--brown); padding: 14px 20px; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+    .trust-track { display: flex; gap: 10px; justify-content: center; align-items: center; }
+    .trust-pill { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.07); border-radius: 100px; padding: 8px 16px; flex-shrink: 0; }
     .trust-pill-icon { width: 28px; height: 28px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .trust-pill-icon svg { width: 14px; height: 14px; color: var(--brown); }
     .trust-pill-text { font-size: 13px; font-weight: 600; color: var(--white); white-space: nowrap; }
+    @keyframes trust-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     @media (max-width: 768px) {
-      .trust-strip { position: relative; min-height: 52px; padding: 0; }
-      .trust-pill {
-        position: absolute;
-        top: 50%; left: 50%;
-        transform: translate(-50%, -50%);
-        opacity: 0;
-        transition: opacity 0.5s ease;
-        pointer-events: none;
-      }
-      .trust-pill.is-active { opacity: 1; pointer-events: auto; }
+      .trust-strip { padding: 10px 0; }
+      .trust-track { width: max-content; animation: trust-scroll 10s linear infinite; }
     }
-    @media (prefers-reduced-motion: reduce) { .trust-pill { transition: none; } }
+    @media (min-width: 769px) {
+      .trust-pill[aria-hidden="true"] { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .trust-track { animation: none; } }
     .order-form {
       background: var(--white); border-radius: var(--radius);
       padding: 24px 20px; box-shadow: var(--shadow-lg);
@@ -670,24 +667,45 @@
 </section>
 
 <!-- Trust Strip -->
-<div class="trust-strip" role="list" aria-label="Nos garanties">
-  <div class="trust-pill is-active" role="listitem">
-    <div class="trust-pill-icon" aria-hidden="true">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+<div class="trust-strip" role="region" aria-label="Nos garanties">
+  <div class="trust-track">
+    <div class="trust-pill">
+      <div class="trust-pill-icon" aria-hidden="true">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+      </div>
+      <span class="trust-pill-text">Paiement à la livraison</span>
     </div>
-    <span class="trust-pill-text">Paiement à la livraison</span>
-  </div>
-  <div class="trust-pill" role="listitem">
-    <div class="trust-pill-icon" aria-hidden="true">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+    <div class="trust-pill">
+      <div class="trust-pill-icon" aria-hidden="true">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+      </div>
+      <span class="trust-pill-text">Livraison gratuite</span>
     </div>
-    <span class="trust-pill-text">Livraison gratuite</span>
-  </div>
-  <div class="trust-pill" role="listitem">
-    <div class="trust-pill-icon" aria-hidden="true">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+    <div class="trust-pill">
+      <div class="trust-pill-icon" aria-hidden="true">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      </div>
+      <span class="trust-pill-text">100% sécurisé</span>
     </div>
-    <span class="trust-pill-text">100% sécurisé</span>
+    <!-- Duplicate set for seamless loop (mobile marquee only) -->
+    <div class="trust-pill" aria-hidden="true">
+      <div class="trust-pill-icon" aria-hidden="true">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+      </div>
+      <span class="trust-pill-text">Paiement à la livraison</span>
+    </div>
+    <div class="trust-pill" aria-hidden="true">
+      <div class="trust-pill-icon" aria-hidden="true">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+      </div>
+      <span class="trust-pill-text">Livraison gratuite</span>
+    </div>
+    <div class="trust-pill" aria-hidden="true">
+      <div class="trust-pill-icon" aria-hidden="true">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      </div>
+      <span class="trust-pill-text">100% sécurisé</span>
+    </div>
   </div>
 </div>
 
@@ -1206,18 +1224,6 @@
     }
   })();
 
-  // ─── TRUST STRIP MOBILE CYCLE ───
-  (function() {
-    if (!window.matchMedia('(max-width: 768px)').matches) return;
-    var pills = document.querySelectorAll('.trust-strip .trust-pill');
-    if (pills.length < 2) return;
-    var cur = 0;
-    setInterval(function() {
-      pills[cur].classList.remove('is-active');
-      cur = (cur + 1) % pills.length;
-      pills[cur].classList.add('is-active');
-    }, 3000);
-  })();
 
   // ─── COLOR PICKER SWITCHER ───
   function updateColorPickers() {
