@@ -188,6 +188,7 @@
       border-radius: 100px;
       white-space: nowrap;
     }
+    .pack-discount { background: #3B82A0; color: #fff; }
     .hero h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(36px, 9vw, 68px);
@@ -738,18 +739,11 @@
             <label>Choisissez votre pack <span>*</span></label>
             <div class="pack-selector" role="radiogroup" aria-label="Sélection du pack">
               <div class="pack-option">
+                <span class="pack-popular pack-discount">Discount: 2 à 329 DH</span>
                 <input type="radio" id="pack-solo" name="pack" value="Pack Solo – 199 DH" data-price="199">
                 <label class="pack-option-label" for="pack-solo">
                   <span class="pack-option-name">Solo</span>
                   <span class="pack-option-price">199</span>
-                  <span class="pack-option-dh">DH</span>
-                </label>
-              </div>
-              <div class="pack-option">
-                <input type="radio" id="pack-solo-x2" name="pack" value="Pack Solo x2 – 329 DH" data-price="329" data-bundle-qty="2">
-                <label class="pack-option-label" for="pack-solo-x2">
-                  <span class="pack-option-name">Solo x2</span>
-                  <span class="pack-option-price">329</span>
                   <span class="pack-option-dh">DH</span>
                 </label>
               </div>
@@ -1265,22 +1259,22 @@
 
   // ─── COLOR PICKER SWITCHER ───
   function updateColorPickers() {
-    var pack       = document.querySelector('input[name="pack"]:checked');
-    var c1Label    = document.getElementById('color1-label');
-    var c2Group    = document.getElementById('color2-group');
-    var c2Label    = document.getElementById('color2-label');
-    var qtyGroup   = document.getElementById('qty-group');
-    var qtyInput   = document.getElementById('qty');
+    var pack     = document.querySelector('input[name="pack"]:checked');
+    var c1Label  = document.getElementById('color1-label');
+    var c2Group  = document.getElementById('color2-group');
+    var c2Label  = document.getElementById('color2-label');
+    var qtyInput = document.getElementById('qty');
     if (!pack) return;
 
-    var isSoloX2 = pack.id === 'pack-solo-x2';
-    var isSolo   = pack.id === 'pack-solo';
-    var isDuo    = pack.id === 'pack-duo';
-    var qty      = parseInt(qtyInput.value, 10) || 1;
-    var show2    = isSoloX2 || (isDuo && qty >= 2);
+    var isSolo = pack.id === 'pack-solo';
+    var isDuo  = pack.id === 'pack-duo';
+    var qty    = parseInt(qtyInput.value, 10) || 1;
+
+    // 2nd color picker: Solo only at exactly qty=2 (discount deal), P&S at qty≥2
+    var show2 = (isSolo && qty === 2) || (isDuo && qty >= 2);
 
     // Color 1 label
-    if (isSoloX2) {
+    if (isSolo && qty === 2) {
       c1Label.innerHTML = 'Couleur du 1er sac <span style="color:var(--gold-dark)">*</span>';
     } else if (isSolo) {
       c1Label.innerHTML = 'Couleur de votre sac <span style="color:var(--gold-dark)">*</span>';
@@ -1290,21 +1284,16 @@
       c1Label.innerHTML = 'Couleur de votre ensemble (sac + chapeau) <span style="color:var(--gold-dark)">*</span>';
     }
 
-    // Color 2 label + visibility
-    if (isSoloX2) {
+    // Color 2 label
+    if (isSolo && qty === 2) {
       c2Label.innerHTML = 'Couleur du 2ème sac <span style="color:var(--gold-dark)">*</span>';
     } else if (isDuo && qty >= 2) {
       c2Label.innerHTML = 'Couleur de l\'ensemble 2 <span style="color:var(--gold-dark)">*</span>';
     }
-    c2Group.style.display = show2 ? 'block' : 'none';
 
-    // Lock qty to 2 and hide stepper for bundle
-    if (isSoloX2) {
-      qtyInput.value = 2;
-      qtyGroup.style.display = 'none';
-    } else {
-      qtyGroup.style.display = '';
-    }
+    c2Group.style.display = show2 ? 'block' : 'none';
+    // Stepper always visible — no more bundle locking
+    document.getElementById('qty-group').style.display = '';
   }
   document.querySelectorAll('input[name="pack"]').forEach(function(r) {
     r.addEventListener('change', updateColorPickers);
@@ -1421,17 +1410,17 @@
     spinner.style.display = 'block';
     submitText.textContent = 'Envoi en cours...';
 
-    const packEl      = document.querySelector('input[name="pack"]:checked');
-    const packLabel   = packEl.value;
-    const price       = parseInt(packEl.dataset.price, 10);
-    const bundleQty   = packEl.dataset.bundleQty ? parseInt(packEl.dataset.bundleQty, 10) : null;
-    const couleur     = document.querySelector('input[name="color"]:checked').value;
-    const color2Group = document.getElementById('color2-group');
-    const couleur2    = color2Group.style.display !== 'none'
-                        ? document.querySelector('input[name="color2"]:checked').value
-                        : '';
-    const quantite    = bundleQty || parseInt(document.getElementById('qty').value, 10);
-    const total       = bundleQty ? price : price * quantite; // bundle = fixed price, not ×qty
+    const packEl          = document.querySelector('input[name="pack"]:checked');
+    const price           = parseInt(packEl.dataset.price, 10);
+    const couleur         = document.querySelector('input[name="color"]:checked').value;
+    const color2Group     = document.getElementById('color2-group');
+    const couleur2        = color2Group.style.display !== 'none'
+                            ? document.querySelector('input[name="color2"]:checked').value
+                            : '';
+    const quantite        = parseInt(document.getElementById('qty').value, 10);
+    const isSoloDiscount  = packEl.id === 'pack-solo' && quantite === 2;
+    const total           = isSoloDiscount ? 329 : price * quantite;
+    const packLabel       = isSoloDiscount ? 'Pack Solo x2 – 329 DH (offre 2 sacs)' : packEl.value;
     const nom         = document.getElementById('name').value.trim();
     const telephone   = document.getElementById('phone').value.trim();
     const ville       = getCityValue();
