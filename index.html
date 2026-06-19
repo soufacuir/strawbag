@@ -64,33 +64,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      overflow: hidden;
+      padding: 0 16px;
     }
-    .promo-bar-item {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      white-space: nowrap;
-    }
-    .promo-bar-item.is-active { opacity: 1; }
-    .promo-bar-icon {
-      width: 26px; height: 26px;
-      background: var(--gold);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .promo-bar-icon svg { width: 13px; height: 13px; color: var(--brown); }
-    .promo-bar-main { font-size: 13px; font-weight: 700; color: var(--white); }
-    .promo-bar-sep { color: var(--gold); margin: 0 3px; font-weight: 400; }
-    .promo-bar-sub { font-size: 12px; font-weight: 500; color: var(--gold-light); }
-    @media (prefers-reduced-motion: reduce) {
-      .promo-bar-item { transition: none; }
-    }
+    .promo-bar-msg { font-size: 13px; font-weight: 600; color: var(--white); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    .promo-bar-sep { color: var(--gold); font-weight: 400; }
+    .promo-bar-cta { color: var(--gold); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; transition: color 0.2s; }
+    .promo-bar-cta:hover { color: var(--gold-light); }
 
     /* ─── HEADER ─── */
     header {
@@ -619,40 +598,13 @@
 </head>
 <body>
 
-<!-- Promo Bar (cycling trust badges) -->
-<div class="promo-bar" role="region" aria-label="Nos engagements">
-  <div class="promo-bar-item is-active">
-    <div class="promo-bar-icon" aria-hidden="true">
-      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-    </div>
-    <span class="promo-bar-main">Paiement à la livraison</span>
-    <span class="promo-bar-sep" aria-hidden="true">·</span>
-    <span class="promo-bar-sub">Cash on Delivery</span>
-  </div>
-  <div class="promo-bar-item">
-    <div class="promo-bar-icon" aria-hidden="true">
-      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
-    </div>
-    <span class="promo-bar-main">Livraison gratuite</span>
-    <span class="promo-bar-sep" aria-hidden="true">·</span>
-    <span class="promo-bar-sub">Partout au Maroc</span>
-  </div>
-  <div class="promo-bar-item">
-    <div class="promo-bar-icon" aria-hidden="true">
-      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-    </div>
-    <span class="promo-bar-main">Qualité garantie</span>
-    <span class="promo-bar-sep" aria-hidden="true">·</span>
-    <span class="promo-bar-sub">Artisanat authentique</span>
-  </div>
-  <div class="promo-bar-item">
-    <div class="promo-bar-icon" aria-hidden="true">
-      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-    </div>
-    <span class="promo-bar-main">Livraison rapide</span>
-    <span class="promo-bar-sep" aria-hidden="true">·</span>
-    <span class="promo-bar-sub">2–3 jours ouvrables</span>
-  </div>
+<!-- Promo Bar -->
+<div class="promo-bar" role="region" aria-label="Offre limitée">
+  <p class="promo-bar-msg">
+    ⚡ Offre limitée — Stock bientôt épuisé
+    <span class="promo-bar-sep" aria-hidden="true">|</span>
+    <a href="#commander" class="promo-bar-cta">Commande maintenant</a>
+  </p>
 </div>
 
 <!-- Header -->
@@ -1531,17 +1483,6 @@
     }, 3500);
   })();
 
-  // ─── TRUST BAR CYCLING ───
-  (function() {
-    var items = document.querySelectorAll('.promo-bar-item');
-    if (!items.length) return;
-    var cur = 0;
-    setInterval(function() {
-      items[cur].classList.remove('is-active');
-      cur = (cur + 1) % items.length;
-      items[cur].classList.add('is-active');
-    }, 3000);
-  })();
 
 
   // First popup at 8s, then random 30–45s intervals
