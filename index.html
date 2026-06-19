@@ -746,6 +746,14 @@
                 </label>
               </div>
               <div class="pack-option">
+                <input type="radio" id="pack-solo-x2" name="pack" value="Pack Solo x2 – 329 DH" data-price="329" data-bundle-qty="2">
+                <label class="pack-option-label" for="pack-solo-x2">
+                  <span class="pack-option-name">Solo x2</span>
+                  <span class="pack-option-price">329</span>
+                  <span class="pack-option-dh">DH</span>
+                </label>
+              </div>
+              <div class="pack-option">
                 <span class="pack-popular">⭐ Populaire</span>
                 <input type="radio" id="pack-duo" name="pack" value="Pack Paille &amp; Soleil – 249 DH" data-price="249" checked>
                 <label class="pack-option-label" for="pack-duo">
@@ -760,7 +768,7 @@
 
           <!-- Color 1 -->
           <div class="form-group" id="color1-group">
-            <label id="color1-label">Couleur de votre sac <span>*</span></label>
+            <label id="color1-label">Couleur de votre sac <span style="color:var(--gold-dark)">*</span></label>
             <div class="color-selector" role="radiogroup" aria-labelledby="color1-label">
               <div class="color-option">
                 <input type="radio" id="color-beige" name="color" value="Sable & Noir" checked>
@@ -779,9 +787,29 @@
             </div>
           </div>
 
+          <!-- Color 2 (shown when qty=2) -->
+          <div class="form-group" id="color2-group" style="display:none">
+            <label id="color2-label">Couleur du 2ème sac <span style="color:var(--gold-dark)">*</span></label>
+            <div class="color-selector" role="radiogroup" aria-labelledby="color2-label">
+              <div class="color-option">
+                <input type="radio" id="color2-beige" name="color2" value="Sable & Noir" checked>
+                <label class="color-option-label" for="color2-beige">
+                  <div class="color-dot sable-noir" aria-hidden="true"></div>
+                  <span class="color-option-text">Sable & Noir</span>
+                </label>
+              </div>
+              <div class="color-option">
+                <input type="radio" id="color2-brown" name="color2" value="Sable & Blanc">
+                <label class="color-option-label" for="color2-brown">
+                  <div class="color-dot beige-blanc" aria-hidden="true"></div>
+                  <span class="color-option-text">Sable & Blanc</span>
+                </label>
+              </div>
+            </div>
+          </div>
 
           <!-- Quantity -->
-          <div class="form-group">
+          <div class="form-group" id="qty-group">
             <label for="qty">Quantité</label>
             <div class="qty-wrapper">
               <button type="button" class="qty-btn" aria-label="Diminuer la quantité" onclick="changeQty(-1)">−</button>
@@ -1237,13 +1265,45 @@
 
   // ─── COLOR PICKER SWITCHER ───
   function updateColorPickers() {
-    const pack = document.querySelector('input[name="pack"]:checked');
-    const color1Label = document.getElementById('color1-label');
+    var pack       = document.querySelector('input[name="pack"]:checked');
+    var c1Label    = document.getElementById('color1-label');
+    var c2Group    = document.getElementById('color2-group');
+    var c2Label    = document.getElementById('color2-label');
+    var qtyGroup   = document.getElementById('qty-group');
+    var qtyInput   = document.getElementById('qty');
     if (!pack) return;
-    if (pack.id === 'pack-solo') {
-      color1Label.innerHTML = 'Couleur de votre sac <span style="color:var(--gold-dark)">*</span>';
+
+    var isSoloX2 = pack.id === 'pack-solo-x2';
+    var isSolo   = pack.id === 'pack-solo';
+    var isDuo    = pack.id === 'pack-duo';
+    var qty      = parseInt(qtyInput.value, 10) || 1;
+    var show2    = isSoloX2 || (isDuo && qty >= 2);
+
+    // Color 1 label
+    if (isSoloX2) {
+      c1Label.innerHTML = 'Couleur du 1er sac <span style="color:var(--gold-dark)">*</span>';
+    } else if (isSolo) {
+      c1Label.innerHTML = 'Couleur de votre sac <span style="color:var(--gold-dark)">*</span>';
+    } else if (isDuo && qty >= 2) {
+      c1Label.innerHTML = 'Couleur de l\'ensemble 1 <span style="color:var(--gold-dark)">*</span>';
     } else {
-      color1Label.innerHTML = 'Couleur de votre ensemble (sac + chapeau) <span style="color:var(--gold-dark)">*</span>';
+      c1Label.innerHTML = 'Couleur de votre ensemble (sac + chapeau) <span style="color:var(--gold-dark)">*</span>';
+    }
+
+    // Color 2 label + visibility
+    if (isSoloX2) {
+      c2Label.innerHTML = 'Couleur du 2ème sac <span style="color:var(--gold-dark)">*</span>';
+    } else if (isDuo && qty >= 2) {
+      c2Label.innerHTML = 'Couleur de l\'ensemble 2 <span style="color:var(--gold-dark)">*</span>';
+    }
+    c2Group.style.display = show2 ? 'block' : 'none';
+
+    // Lock qty to 2 and hide stepper for bundle
+    if (isSoloX2) {
+      qtyInput.value = 2;
+      qtyGroup.style.display = 'none';
+    } else {
+      qtyGroup.style.display = '';
     }
   }
   document.querySelectorAll('input[name="pack"]').forEach(function(r) {
@@ -1264,9 +1324,10 @@
 
   // ─── QUANTITY ───
   function changeQty(delta) {
-    const input = document.getElementById('qty');
-    const val = parseInt(input.value, 10) || 1;
+    var input = document.getElementById('qty');
+    var val = parseInt(input.value, 10) || 1;
     input.value = Math.max(1, Math.min(10, val + delta));
+    updateColorPickers();
   }
 
   // ─── CITY SWITCHER ───
@@ -1360,18 +1421,22 @@
     spinner.style.display = 'block';
     submitText.textContent = 'Envoi en cours...';
 
-    const packEl    = document.querySelector('input[name="pack"]:checked');
-    const packLabel = packEl.value;                          // e.g. "Pack Paille & Soleil – 249 DH"
-    const price     = parseInt(packEl.dataset.price, 10);   // numeric
-    const color1  = document.querySelector('input[name="color"]:checked').value;
-    const couleur = color1;
-    const quantite  = parseInt(document.getElementById('qty').value, 10);
-    const total     = price * quantite;                     // numeric, no " DH"
-    const nom       = document.getElementById('name').value.trim();
-    const telephone = document.getElementById('phone').value.trim();
-    const ville     = getCityValue();
-    const adresse   = document.getElementById('address').value.trim();
-    const timestamp = new Date().toLocaleString('fr-MA', { timeZone: 'Africa/Casablanca' });
+    const packEl      = document.querySelector('input[name="pack"]:checked');
+    const packLabel   = packEl.value;
+    const price       = parseInt(packEl.dataset.price, 10);
+    const bundleQty   = packEl.dataset.bundleQty ? parseInt(packEl.dataset.bundleQty, 10) : null;
+    const couleur     = document.querySelector('input[name="color"]:checked').value;
+    const color2Group = document.getElementById('color2-group');
+    const couleur2    = color2Group.style.display !== 'none'
+                        ? document.querySelector('input[name="color2"]:checked').value
+                        : '';
+    const quantite    = bundleQty || parseInt(document.getElementById('qty').value, 10);
+    const total       = bundleQty ? price : price * quantite; // bundle = fixed price, not ×qty
+    const nom         = document.getElementById('name').value.trim();
+    const telephone   = document.getElementById('phone').value.trim();
+    const ville       = getCityValue();
+    const adresse     = document.getElementById('address').value.trim();
+    const timestamp   = new Date().toLocaleString('fr-MA', { timeZone: 'Africa/Casablanca' });
 
     // Payload exactly matching Apps Script expectations
     const orderData = {
@@ -1384,6 +1449,7 @@
       quantite,
       total,
       couleur,
+      couleur2,
       source,
       timestamp
     };
@@ -1397,11 +1463,14 @@
     const TG_BOT    = '8717009215:AAFDH6FBbBr9xepq8j9wXGoO96idGSQyHu8';
     const TG_CHAT   = '8600859419';
 
+    const couleurLine = couleur2
+      ? '🎨 Couleur 1: ' + couleur + '\n🎨 Couleur 2: ' + couleur2
+      : '🎨 Couleur: '   + couleur;
     const tgMsg = [
       '🌿 Nouvelle commande Paille & Soleil!',
       '',
       '📦 Pack: '    + packLabel,
-      '🎨 Couleur: ' + couleur,
+      couleurLine,
       '👤 Nom: '     + nom,
       '📞 Tél: '     + telephone,
       '🏙️ Ville: '   + ville,
@@ -1430,7 +1499,7 @@
     } catch(err) { console.warn('Telegram:', err); }
 
     document.getElementById('s-pack').textContent = packLabel;
-    document.getElementById('s-color').textContent = couleur;
+    document.getElementById('s-color').textContent = couleur2 ? couleur + ' / ' + couleur2 : couleur;
     document.getElementById('s-total').textContent = total + ' DH';
     document.getElementById('success-share-btn').href = 'https://wa.me/?text=' + encodeURIComponent("🌿 J'ai trouvé des sacs et chapeaux en paille artisanaux du Maroc!\nPack Paille & Soleil à seulement 249 DH 🎉\nLivraison gratuite + Paiement à la livraison 🚚\n👉 https://strawbag.pages.dev");
 
@@ -1447,8 +1516,11 @@
     document.getElementById('phone').value = '';
     document.getElementById('address').value = '';
     document.getElementById('qty').value = 1;
+    document.getElementById('qty-group').style.display = '';
     document.getElementById('pack-solo').checked = true;
     document.getElementById('color-beige').checked = true;
+    document.getElementById('color2-beige').checked = true;
+    document.getElementById('color2-group').style.display = 'none';
     resetCityToDropdown();
     updateColorPickers();
     ['name','phone','address'].forEach(function(f) { clearError(f, f+'-error'); });
