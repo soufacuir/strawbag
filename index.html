@@ -167,23 +167,26 @@
     }
     @media (max-width: 768px) {
       .hero-content { position: absolute; bottom: 18%; left: 0; right: 0; margin: 0; padding: 16px 28px 20px; }
-      .hero-badge { font-size: 10px; padding: 5px 14px; margin-bottom: 12px; margin-top: 24px; }
+
       .hero h1 { font-size: clamp(26px, 7vw, 32px); margin-bottom: 10px; }
       .hero-desc { font-size: 13px; line-height: 1.55; margin-bottom: 18px; }
       .hero-cta { font-size: 14px; padding: 12px 26px; }
     }
     @media (min-width: 769px)  { .hero-content { margin-top: -200px; } }
-    .hero-badge {
-      display: inline-block;
+    .pack-popular {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
       background: var(--gold);
       color: var(--brown);
-      font-size: 11px;
+      font-size: 9px;
       font-weight: 700;
-      letter-spacing: 2.5px;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      padding: 6px 18px;
+      padding: 3px 10px;
       border-radius: 100px;
-      margin-bottom: 24px;
+      white-space: nowrap;
     }
     .hero h1 {
       font-family: 'Playfair Display', serif;
@@ -655,7 +658,6 @@
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-content">
-    <span class="hero-badge">Nouveauté Été 2026</span>
     <h1 id="hero-heading">
       L'art de la <em>paille</em><br>façonné à la main
     </h1>
@@ -810,6 +812,7 @@
                 </label>
               </div>
               <div class="pack-option">
+                <span class="pack-popular">⭐ Populaire</span>
                 <input type="radio" id="pack-duo" name="pack" value="Pack Paille &amp; Soleil – 249 DH" data-price="249" checked>
                 <label class="pack-option-label" for="pack-duo">
                   <span class="pack-option-name">P&amp;S</span>
