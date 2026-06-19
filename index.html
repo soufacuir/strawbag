@@ -253,51 +253,6 @@
       50%      { transform: translateX(-50%) translateY(8px); }
     }
 
-
-    /* ─── TRUST BAR (cycling) ─── */
-    .trust-bar {
-      background: var(--brown);
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .trust-items {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .trust-item {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      white-space: nowrap;
-    }
-    .trust-item.is-active { opacity: 1; }
-    .trust-icon {
-      width: 36px; height: 36px;
-      background: var(--gold); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .trust-icon svg { width: 18px; height: 18px; color: var(--brown); }
-    .trust-name { font-size: 14px; font-weight: 700; color: var(--white); }
-    .trust-desc { font-size: 12px; color: var(--gold-light); margin-top: 2px; }
-    #trust-countdown { font-weight: 700; font-size: 13px; letter-spacing: 0.5px; font-variant-numeric: tabular-nums; }
-    @media (prefers-reduced-motion: reduce) {
-      .trust-item { transition: none; }
-    }
-
     /* ─── SECTIONS ─── */
     section { padding: 64px 20px; }
     .section-label {
@@ -770,41 +725,6 @@
   </div>
 </section>
 
-<!-- Trust Bar (cycling) -->
-<div class="trust-bar" role="region" aria-label="Garanties">
-  <div class="trust-items">
-    <div class="trust-item is-active">
-      <div class="trust-icon" aria-hidden="true">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-      </div>
-      <div><div class="trust-name">Offre se termine dans :</div><div class="trust-desc" id="trust-countdown">--:--:--</div></div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon" aria-hidden="true">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-      </div>
-      <div><div class="trust-name">Paiement à la livraison</div><div class="trust-desc">Cash on Delivery – COD</div></div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon" aria-hidden="true">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-      </div>
-      <div><div class="trust-name">Livraison gratuite</div><div class="trust-desc">Partout au Maroc</div></div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon" aria-hidden="true">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-      </div>
-      <div><div class="trust-name">Qualité garantie</div><div class="trust-desc">Artisanat authentique</div></div>
-    </div>
-    <div class="trust-item">
-      <div class="trust-icon" aria-hidden="true">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"/></svg>
-      </div>
-      <div><div class="trust-name">Stock limité</div><div class="trust-desc">Plus que quelques pièces disponibles</div></div>
-    </div>
-  </div>
-</div>
 
 <!-- Packs Section -->
 <section class="packs" id="packs" aria-labelledby="packs-heading">
@@ -1709,59 +1629,6 @@
     }, 3000);
   })();
 
-  // ─── OFFER COUNTDOWN ───
-  (function() {
-    var DURATION = 2 * 60 * 60;
-    var KEY = 'ps_offer_start';
-    var el = document.getElementById('trust-countdown');
-    if (!el) return;
-    function pad(n) { return (n < 10 ? '0' : '') + n; }
-    function getStart() {
-      try {
-        var stored = localStorage.getItem(KEY);
-        if (stored) { var t = parseInt(stored, 10); if (!isNaN(t)) return t; }
-        var now = Date.now();
-        localStorage.setItem(KEY, now);
-        return now;
-      } catch(e) { return Date.now(); }
-    }
-    function tick() {
-      var elapsed = Math.floor((Date.now() - getStart()) / 1000);
-      var remaining = DURATION - (elapsed % DURATION);
-      var h = Math.floor(remaining / 3600);
-      var m = Math.floor((remaining % 3600) / 60);
-      var s = remaining % 60;
-      el.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
-    }
-    tick();
-    setInterval(tick, 1000);
-  })();
-
-  // ─── TRUST SECTION CYCLING ───
-  // Starts only when trust bar enters viewport so countdown is always the first badge seen
-  (function() {
-    var items = document.querySelectorAll('.trust-item');
-    if (!items.length) return;
-    var cur = 0;
-    var started = false;
-    function startCycling() {
-      if (started) return;
-      started = true;
-      setInterval(function() {
-        items[cur].classList.remove('is-active');
-        cur = (cur + 1) % items.length;
-        items[cur].classList.add('is-active');
-      }, 3000);
-    }
-    var bar = document.querySelector('.trust-bar');
-    if (bar && 'IntersectionObserver' in window) {
-      new IntersectionObserver(function(entries, obs) {
-        if (entries[0].isIntersecting) { startCycling(); obs.disconnect(); }
-      }, { threshold: 0.5 }).observe(bar);
-    } else {
-      startCycling();
-    }
-  })();
 
   // First popup at 8s, then random 30–45s intervals
   setTimeout(function() {
