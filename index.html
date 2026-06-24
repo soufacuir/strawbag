@@ -281,10 +281,10 @@
       font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
       padding: 4px 12px; border-radius: 100px;
     }
-    .pack-slideshow { position: relative; width: 100%; height: 240px; overflow: hidden; background: var(--sand); }
+    .pack-slideshow { position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: var(--white); }
     .pack-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease; }
     .pack-slide.is-active { opacity: 1; }
-    .pack-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pack-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
     .pack-card.selected { border-color: var(--gold) !important; box-shadow: 0 0 0 4px rgba(201,169,110,0.25), var(--shadow-lg); }
     .pack-body { padding: 20px 24px 24px; }
     .pack-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--brown); margin-bottom: 2px; }
@@ -748,20 +748,20 @@
       </div>
     </div>
 
-    <!-- Sable & Blanc -->
-    <div class="pack-card" data-color="Sable &amp; Blanc">
+    <!-- Sable & Blanc Cassé -->
+    <div class="pack-card" data-color="Sable &amp; Blanc Cassé">
       <div class="pack-slideshow" aria-hidden="true">
         <div class="pack-slide is-active">
-          <img src="./images/pack-blanc-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc – produit" loading="lazy" width="400" height="400">
+          <img src="./images/pack-blanc-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc Cassé – produit" loading="lazy" width="400" height="400">
         </div>
         <div class="pack-slide">
-          <img src="./images/pack-blanc-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc – lifestyle" loading="lazy" width="400" height="400">
+          <img src="./images/pack-blanc-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc Cassé – lifestyle" loading="lazy" width="400" height="400">
         </div>
       </div>
       <div class="pack-body">
         <div class="pack-name">Pack Paille &amp; Soleil</div>
-        <div class="pack-variant">Sable &amp; Blanc</div>
-        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Blanc">
+        <div class="pack-variant">Sable &amp; Blanc Cassé</div>
+        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Blanc Cassé">
           <li>1 sac en paille artisanal</li>
           <li>1 chapeau en paille assorti</li>
           <li>Livraison gratuite</li>
@@ -770,7 +770,7 @@
           <span class="pack-price-amount">249</span>
           <span class="pack-price-currency">DH</span>
         </div>
-        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Blanc')" aria-label="Choisir le coloris Sable &amp; Blanc à 249 DH">
+        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Blanc Cassé')" aria-label="Choisir le coloris Sable &amp; Blanc Cassé à 249 DH">
           Commander ce pack
         </button>
       </div>
@@ -861,10 +861,10 @@
                 </label>
               </div>
               <div class="color-option">
-                <input type="radio" id="color-brown" name="color" value="Sable & Blanc">
+                <input type="radio" id="color-brown" name="color" value="Sable & Blanc Cassé">
                 <label class="color-option-label" for="color-brown">
                   <div class="color-dot beige-blanc" aria-hidden="true"></div>
-                  <span class="color-option-text">Sable & Blanc</span>
+                  <span class="color-option-text">Sable & Blanc Cassé</span>
                 </label>
               </div>
               <div class="color-option">
@@ -889,10 +889,10 @@
                 </label>
               </div>
               <div class="color-option">
-                <input type="radio" id="color2-brown" name="color2" value="Sable & Blanc">
+                <input type="radio" id="color2-brown" name="color2" value="Sable & Blanc Cassé">
                 <label class="color-option-label" for="color2-brown">
                   <div class="color-dot beige-blanc" aria-hidden="true"></div>
-                  <span class="color-option-text">Sable & Blanc</span>
+                  <span class="color-option-text">Sable & Blanc Cassé</span>
                 </label>
               </div>
               <div class="color-option">
@@ -1177,8 +1177,8 @@
       <div class="color-name">Sable & Noir</div>
     </div>
     <div class="color-item" role="listitem">
-      <div class="color-swatch beige-blanc" aria-label="Coloris Sable & Blanc"></div>
-      <div class="color-name">Sable & Blanc</div>
+      <div class="color-swatch beige-blanc" aria-label="Coloris Sable & Blanc Cassé"></div>
+      <div class="color-name">Sable & Blanc Cassé</div>
     </div>
   </div>
 </section>
@@ -1574,19 +1574,19 @@
   const spData = [
     { name:'Fatima',   city:'Casablanca',   pack:'Pack Paille & Soleil – Sable & Noir',   mins:2  },
     { name:'Khadija',  city:'Rabat',        pack:'Pack Paille & Soleil – Sable & Beige',  mins:5  },
-    { name:'Nadia',    city:'Marrakech',    pack:'Pack Paille & Soleil – Sable & Blanc',  mins:8  },
+    { name:'Nadia',    city:'Marrakech',    pack:'Pack Paille & Soleil – Sable & Blanc Cassé',  mins:8  },
     { name:'Zineb',    city:'Agadir',       pack:'Pack Paille & Soleil – Sable & Noir',   mins:1  },
     { name:'Layla',    city:'Fès',          pack:'Pack Paille & Soleil – Sable & Beige',  mins:12 },
-    { name:'Meryem',   city:'Tanger',       pack:'Pack Paille & Soleil – Sable & Blanc',  mins:3  },
+    { name:'Meryem',   city:'Tanger',       pack:'Pack Paille & Soleil – Sable & Blanc Cassé',  mins:3  },
     { name:'Imane',    city:'Meknès',       pack:'Pack Paille & Soleil – Sable & Noir',   mins:7  },
     { name:'Sara',     city:'Oujda',        pack:'Pack Paille & Soleil – Sable & Beige',  mins:15 },
-    { name:'Houda',    city:'Kénitra',      pack:'Pack Paille & Soleil – Sable & Blanc',  mins:4  },
+    { name:'Houda',    city:'Kénitra',      pack:'Pack Paille & Soleil – Sable & Blanc Cassé',  mins:4  },
     { name:'Asmaa',    city:'Tétouan',      pack:'Pack Paille & Soleil – Sable & Noir',   mins:9  },
     { name:'Loubna',   city:'El Jadida',    pack:'Pack Paille & Soleil – Sable & Beige',  mins:6  },
-    { name:'Hajar',    city:'Béni Mellal',  pack:'Pack Paille & Soleil – Sable & Blanc',  mins:11 },
+    { name:'Hajar',    city:'Béni Mellal',  pack:'Pack Paille & Soleil – Sable & Blanc Cassé',  mins:11 },
     { name:'Soukaina', city:'Chefchaouen',  pack:'Pack Paille & Soleil – Sable & Noir',   mins:2  },
     { name:'Widad',    city:'Essaouira',    pack:'Pack Paille & Soleil – Sable & Beige',  mins:18 },
-    { name:'Hanane',   city:'Ouarzazate',   pack:'Pack Paille & Soleil – Sable & Blanc',  mins:14 },
+    { name:'Hanane',   city:'Ouarzazate',   pack:'Pack Paille & Soleil – Sable & Blanc Cassé',  mins:14 },
   ];
   let spIndex = 0;
   let spDismissed = false;
