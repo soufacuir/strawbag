@@ -281,10 +281,12 @@
       font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
       padding: 4px 12px; border-radius: 100px;
     }
-    .pack-slideshow { position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: var(--white); }
+    .pack-slideshow { position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: #fff; }
     .pack-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease; }
     .pack-slide.is-active { opacity: 1; }
-    .pack-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .pack-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pack-slide--product { background: #ffffff; }
+    .pack-slide--product img { object-fit: contain; }
     .pack-card.selected { border-color: var(--gold) !important; box-shadow: 0 0 0 4px rgba(201,169,110,0.25), var(--shadow-lg); }
     .pack-body { padding: 20px 24px 24px; }
     .pack-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--brown); margin-bottom: 2px; }
@@ -723,7 +725,7 @@
     <!-- Sable & Beige -->
     <div class="pack-card" data-color="Sable &amp; Beige">
       <div class="pack-slideshow" aria-hidden="true">
-        <div class="pack-slide is-active">
+        <div class="pack-slide pack-slide--product is-active">
           <img src="./images/pack-beige-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Beige – produit" loading="lazy" width="400" height="400">
         </div>
         <div class="pack-slide">
@@ -751,7 +753,7 @@
     <!-- Sable & Blanc Cassé -->
     <div class="pack-card" data-color="Sable &amp; Blanc Cassé">
       <div class="pack-slideshow" aria-hidden="true">
-        <div class="pack-slide is-active">
+        <div class="pack-slide pack-slide--product is-active">
           <img src="./images/pack-blanc-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc Cassé – produit" loading="lazy" width="400" height="400">
         </div>
         <div class="pack-slide">
@@ -780,7 +782,7 @@
     <div class="pack-card" data-color="Sable &amp; Noir">
       <span class="pack-badge">⭐ Best-seller</span>
       <div class="pack-slideshow" aria-hidden="true">
-        <div class="pack-slide is-active">
+        <div class="pack-slide pack-slide--product is-active">
           <img src="./images/pack-noir-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Noir – produit" loading="lazy" width="400" height="400">
         </div>
         <div class="pack-slide">
@@ -1609,7 +1611,7 @@
     setTimeout(function() { spDismissed = false; }, 120000);
   }
 
-  // ─── PACK CARD SLIDESHOWS (one per card, 3s interval) ───
+  // ─── PACK CARD SLIDESHOWS (one per card, 2s interval) ───
   document.querySelectorAll('.pack-card').forEach(function(card) {
     var slides = card.querySelectorAll('.pack-slide');
     if (slides.length < 2) return;
@@ -1618,7 +1620,7 @@
       slides[current].classList.remove('is-active');
       current = (current + 1) % slides.length;
       slides[current].classList.add('is-active');
-    }, 3000);
+    }, 2000);
   });
 
 
