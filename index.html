@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="description" content="Paille & Soleil – Sacs et chapeaux en paille artisanaux du Maroc. Pack Solo 199 DH, Pack Paille &amp; Soleil 249 DH. Livraison gratuite, paiement à la livraison.">
+  <meta name="description" content="Paille & Soleil – Sacs et chapeaux en paille artisanaux du Maroc. Pack Paille &amp; Soleil 249 DH — 3 coloris au choix. Livraison gratuite, paiement à la livraison.">
   <meta name="keywords" content="sac paille maroc, chapeau paille, artisanat marocain, sac été, accessoires plage">
   <meta property="og:title" content="Paille & Soleil – Sacs & Chapeaux Artisanaux 🇲🇦">
   <meta property="og:description" content="Découvrez nos sacs et chapeaux en paille artisanaux. Livraison gratuite partout au Maroc. Paiement à la livraison.">
@@ -283,18 +283,14 @@
       font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
       padding: 4px 12px; border-radius: 100px;
     }
-    .pack-img { width: 100%; height: 200px; object-fit: cover; }
-    .solo-slideshow { position: relative; width: 100%; height: 260px; overflow: hidden; background: #fff; }
-    .solo-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease; background: #fff; }
-    .solo-slide.is-active { opacity: 1; }
-    .solo-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
-    .duo-slideshow { position: relative; width: 100%; aspect-ratio: 3/4; overflow: hidden; background: #fff; }
-    .duo-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease; background: #fff; }
-    .duo-slide.is-active { opacity: 1; }
-    .duo-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
-    .duo-slide:nth-child(2) img { object-fit: cover; transform: scale(1.2); transform-origin: center 65%; }
-    .pack-body { padding: 24px; }
-    .pack-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--brown); margin-bottom: 8px; }
+    .pack-slideshow { position: relative; width: 100%; height: 240px; overflow: hidden; background: var(--sand); }
+    .pack-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease; }
+    .pack-slide.is-active { opacity: 1; }
+    .pack-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pack-card.selected { border-color: var(--gold) !important; box-shadow: 0 0 0 4px rgba(201,169,110,0.25), var(--shadow-lg); }
+    .pack-body { padding: 20px 24px 24px; }
+    .pack-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--brown); margin-bottom: 2px; }
+    .pack-variant { font-size: 12px; font-weight: 700; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
     .pack-desc { font-size: 13px; color: var(--brown-mid); margin-bottom: 20px; line-height: 1.6; }
     .pack-includes {
       list-style: none; margin-bottom: 24px;
@@ -383,6 +379,7 @@
     }
     .color-option input:checked + .color-option-label { border-color: var(--gold); background: var(--gold-pale); }
     .color-dot { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 2px 6px rgba(0,0,0,0.2); overflow: hidden; }
+    .color-dot.sable-beige { background: linear-gradient(to right, #C4A67E 50%, #E8D5B0 50%); }
     .color-dot.sable-noir { background: linear-gradient(to right, #D4B896 50%, #1a1a1a 50%); }
     .color-dot.beige-blanc { background: linear-gradient(to right, #D4B896 50%, #FFFFFF 50%); border: 2px solid var(--gold-light); }
     .color-option-text { font-size: 13px; font-weight: 600; color: var(--brown); }
@@ -537,6 +534,7 @@
     .colors-grid { display: flex; flex-wrap: nowrap; justify-content: center; gap: 40px; max-width: 380px; margin: 0 auto; }
     .color-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
     .color-swatch { width: 68px; height: 68px; border-radius: 50%; box-shadow: var(--shadow); border: 4px solid var(--white); overflow: hidden; }
+    .color-swatch.sable-beige { background: linear-gradient(to right, #C4A67E 50%, #E8D5B0 50%); }
     .color-swatch.sable-noir { background: linear-gradient(to right, #D4B896 50%, #1a1a1a 50%); }
     .color-swatch.beige-blanc { background: linear-gradient(to right, #D4B896 50%, #FFFFFF 50%); border: 4px solid var(--gold-light); }
     .color-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; color: var(--brown); }
@@ -733,8 +731,8 @@
         <p class="form-subtitle">Tous les champs marqués d'un <span style="color:var(--gold-dark)">*</span> sont obligatoires.</p>
 
         <form id="order-form" novalidate>
-          <!-- Pack Selection -->
-          <div class="form-group" id="pack-section">
+          <!-- Pack Selection (hidden — single pack, color chosen via cards above) -->
+          <div class="form-group" id="pack-section" style="display:none" aria-hidden="true">
             <label>Choisissez votre pack <span>*</span></label>
             <div class="pack-selector" role="radiogroup" aria-label="Sélection du pack">
               <div class="pack-option">
@@ -761,13 +759,13 @@
 
           <!-- Color 1 -->
           <div class="form-group" id="color1-group">
-            <label id="color1-label">Couleur de votre sac <span style="color:var(--gold-dark)">*</span></label>
+            <label id="color1-label">Couleur de votre ensemble (sac + chapeau) <span style="color:var(--gold-dark)">*</span></label>
             <div class="color-selector" role="radiogroup" aria-labelledby="color1-label">
               <div class="color-option">
-                <input type="radio" id="color-beige" name="color" value="Sable & Noir" checked>
+                <input type="radio" id="color-beige" name="color" value="Sable & Beige" checked>
                 <label class="color-option-label" for="color-beige">
-                  <div class="color-dot sable-noir" aria-hidden="true"></div>
-                  <span class="color-option-text">Sable & Noir</span>
+                  <div class="color-dot sable-beige" aria-hidden="true"></div>
+                  <span class="color-option-text">Sable & Beige</span>
                 </label>
               </div>
               <div class="color-option">
@@ -777,18 +775,25 @@
                   <span class="color-option-text">Sable & Blanc</span>
                 </label>
               </div>
+              <div class="color-option">
+                <input type="radio" id="color-noir" name="color" value="Sable & Noir">
+                <label class="color-option-label" for="color-noir">
+                  <div class="color-dot sable-noir" aria-hidden="true"></div>
+                  <span class="color-option-text">Sable & Noir</span>
+                </label>
+              </div>
             </div>
           </div>
 
-          <!-- Color 2 (shown when qty=2) -->
+          <!-- Color 2 (shown when qty≥2) -->
           <div class="form-group" id="color2-group" style="display:none">
-            <label id="color2-label">Couleur du 2ème sac <span style="color:var(--gold-dark)">*</span></label>
+            <label id="color2-label">Couleur du 2ème ensemble <span style="color:var(--gold-dark)">*</span></label>
             <div class="color-selector" role="radiogroup" aria-labelledby="color2-label">
               <div class="color-option">
-                <input type="radio" id="color2-beige" name="color2" value="Sable & Noir" checked>
+                <input type="radio" id="color2-beige" name="color2" value="Sable & Beige" checked>
                 <label class="color-option-label" for="color2-beige">
-                  <div class="color-dot sable-noir" aria-hidden="true"></div>
-                  <span class="color-option-text">Sable & Noir</span>
+                  <div class="color-dot sable-beige" aria-hidden="true"></div>
+                  <span class="color-option-text">Sable & Beige</span>
                 </label>
               </div>
               <div class="color-option">
@@ -796,6 +801,13 @@
                 <label class="color-option-label" for="color2-brown">
                   <div class="color-dot beige-blanc" aria-hidden="true"></div>
                   <span class="color-option-text">Sable & Blanc</span>
+                </label>
+              </div>
+              <div class="color-option">
+                <input type="radio" id="color2-noir" name="color2" value="Sable & Noir">
+                <label class="color-option-label" for="color2-noir">
+                  <div class="color-dot sable-noir" aria-hidden="true"></div>
+                  <span class="color-option-text">Sable & Noir</span>
                 </label>
               </div>
             </div>
@@ -982,67 +994,97 @@
 
 <!-- Packs Section -->
 <section class="packs" id="packs" aria-labelledby="packs-heading">
-  <p class="section-label">Nos Offres</p>
-  <h2 class="section-title" id="packs-heading">Choisissez votre <span>Pack</span></h2>
-  <p class="section-desc">Chaque pack comprend un ensemble assorti : 1 sac + 1 chapeau de la même couleur, fabriqués à la main.</p>
+  <p class="section-label">Nos Coloris</p>
+  <h2 class="section-title" id="packs-heading">Pack Paille &amp; <span>Soleil</span></h2>
+  <p class="section-desc">Sac + chapeau assortis, fabriqués à la main au Maroc — choisissez votre coloris préféré.</p>
 
   <div class="packs-grid">
-    <!-- Pack Solo -->
-    <div class="pack-card">
-      <div class="solo-slideshow" aria-hidden="true">
-        <div class="solo-slide is-active">
-          <img src="./images/produit-sac-sable-noir-fond-blanc.webp" alt="Pack Solo – sac en paille Sable &amp; Noir" loading="lazy" width="400" height="200">
-        </div>
-        <div class="solo-slide">
-          <img src="./images/produit-sac-sable-blanc-charm.webp" alt="Pack Solo – sac en paille Sable &amp; Blanc" loading="lazy" width="400" height="200">
-        </div>
-      </div>
-      <div class="pack-body">
-        <div class="pack-name">Pack Solo</div>
-        <p class="pack-desc">Un sac en paille artisanal pour vous accompagner partout — au marché, à la plage, en ville.</p>
-        <ul class="pack-includes" aria-label="Contenu du Pack Solo">
-          <li>1 sac en paille artisanal</li>
-          <li>Livraison gratuite</li>
-        </ul>
-        <div class="pack-price" aria-label="Prix : 199 dirhams">
-          <span class="pack-price-amount">199</span>
-          <span class="pack-price-currency">DH</span>
-        </div>
-        <button class="pack-cta" onclick="selectPack('solo', 199)" aria-label="Choisir le Pack Solo à 199 DH">
-          Choisir ce pack
-        </button>
-      </div>
-    </div>
 
-    <!-- Pack Paille & Soleil (featured) -->
-    <div class="pack-card featured" aria-label="Pack recommandé">
-      <span class="pack-badge">⭐ Best-seller</span>
-      <div class="duo-slideshow" aria-hidden="true">
-        <div class="duo-slide is-active">
-          <img src="./images/flatlay-duo-sable-noir-rattan.webp" alt="Pack Paille &amp; Soleil – ensemble Sable &amp; Noir" loading="lazy" width="1024" height="1536">
+    <!-- Sable & Beige -->
+    <div class="pack-card" data-color="Sable &amp; Beige">
+      <div class="pack-slideshow" aria-hidden="true">
+        <div class="pack-slide is-active">
+          <img src="./images/pack-beige-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Beige – produit" loading="lazy" width="400" height="400">
         </div>
-        <div class="duo-slide">
-          <img src="./images/flatlay-duo-sable-blanc-accessoires.webp" alt="Pack Paille &amp; Soleil – ensemble Sable &amp; Blanc" loading="lazy" width="1254" height="1254">
+        <div class="pack-slide">
+          <img src="./images/pack-beige-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Beige – lifestyle" loading="lazy" width="400" height="400">
         </div>
       </div>
       <div class="pack-body">
         <div class="pack-name">Pack Paille &amp; Soleil</div>
-        <p class="pack-desc">L'ensemble parfait au meilleur prix — sac et chapeau assortis dans le coloris de votre choix.</p>
-        <ul class="pack-includes" aria-label="Contenu du Pack Paille &amp; Soleil">
+        <div class="pack-variant">Sable &amp; Beige</div>
+        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Beige">
           <li>1 sac en paille artisanal</li>
-          <li>1 chapeau en paille assorti (même couleur)</li>
-          <li>Livraison gratuite prioritaire</li>
-          <li>Emballage cadeau offert</li>
+          <li>1 chapeau en paille assorti</li>
+          <li>Livraison gratuite</li>
         </ul>
         <div class="pack-price" aria-label="Prix : 249 dirhams">
           <span class="pack-price-amount">249</span>
           <span class="pack-price-currency">DH</span>
         </div>
-        <button class="pack-cta" onclick="selectPack('duo', 249)" aria-label="Choisir le Pack Paille &amp; Soleil à 249 DH">
-          Choisir ce pack
+        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Beige')" aria-label="Choisir le coloris Sable &amp; Beige à 249 DH">
+          Choisir ce coloris
         </button>
       </div>
     </div>
+
+    <!-- Sable & Blanc -->
+    <div class="pack-card" data-color="Sable &amp; Blanc">
+      <div class="pack-slideshow" aria-hidden="true">
+        <div class="pack-slide is-active">
+          <img src="./images/pack-blanc-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc – produit" loading="lazy" width="400" height="400">
+        </div>
+        <div class="pack-slide">
+          <img src="./images/pack-blanc-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc – lifestyle" loading="lazy" width="400" height="400">
+        </div>
+      </div>
+      <div class="pack-body">
+        <div class="pack-name">Pack Paille &amp; Soleil</div>
+        <div class="pack-variant">Sable &amp; Blanc</div>
+        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Blanc">
+          <li>1 sac en paille artisanal</li>
+          <li>1 chapeau en paille assorti</li>
+          <li>Livraison gratuite</li>
+        </ul>
+        <div class="pack-price" aria-label="Prix : 249 dirhams">
+          <span class="pack-price-amount">249</span>
+          <span class="pack-price-currency">DH</span>
+        </div>
+        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Blanc')" aria-label="Choisir le coloris Sable &amp; Blanc à 249 DH">
+          Choisir ce coloris
+        </button>
+      </div>
+    </div>
+
+    <!-- Sable & Noir -->
+    <div class="pack-card" data-color="Sable &amp; Noir">
+      <span class="pack-badge">⭐ Best-seller</span>
+      <div class="pack-slideshow" aria-hidden="true">
+        <div class="pack-slide is-active">
+          <img src="./images/pack-noir-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Noir – produit" loading="lazy" width="400" height="400">
+        </div>
+        <div class="pack-slide">
+          <img src="./images/pack-noir-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Noir – lifestyle" loading="lazy" width="400" height="400">
+        </div>
+      </div>
+      <div class="pack-body">
+        <div class="pack-name">Pack Paille &amp; Soleil</div>
+        <div class="pack-variant">Sable &amp; Noir</div>
+        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Noir">
+          <li>1 sac en paille artisanal</li>
+          <li>1 chapeau en paille assorti</li>
+          <li>Livraison gratuite</li>
+        </ul>
+        <div class="pack-price" aria-label="Prix : 249 dirhams">
+          <span class="pack-price-amount">249</span>
+          <span class="pack-price-currency">DH</span>
+        </div>
+        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Noir')" aria-label="Choisir le coloris Sable &amp; Noir à 249 DH">
+          Choisir ce coloris
+        </button>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1156,7 +1198,7 @@
       <div class="testimonial-stars" aria-label="5 étoiles sur 5">
         <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
       </div>
-      <p class="testimonial-text">"Magnifique qualité ! Le sac est encore plus beau en vrai qu'en photo. J'ai commandé le Pack Solo — ravie de mon achat. Livraison rapide à Casablanca !"</p>
+      <p class="testimonial-text">"Magnifique qualité ! Le sac et le chapeau sont encore plus beaux en vrai qu'en photo. J'ai commandé le coloris Sable &amp; Beige — ravie de mon achat. Livraison rapide à Casablanca !"</p>
       <div class="testimonial-author">
         <div class="author-avatar" aria-hidden="true">S</div>
         <div>
@@ -1258,56 +1300,33 @@
 
   // ─── COLOR PICKER SWITCHER ───
   function updateColorPickers() {
-    var pack     = document.querySelector('input[name="pack"]:checked');
     var c1Label  = document.getElementById('color1-label');
     var c2Group  = document.getElementById('color2-group');
     var c2Label  = document.getElementById('color2-label');
-    var qtyInput = document.getElementById('qty');
-    if (!pack) return;
+    var qty      = parseInt(document.getElementById('qty').value, 10) || 1;
+    var show2    = qty >= 2;
 
-    var isSolo = pack.id === 'pack-solo';
-    var isDuo  = pack.id === 'pack-duo';
-    var qty    = parseInt(qtyInput.value, 10) || 1;
-
-    // 2nd color picker: Solo only at exactly qty=2 (discount deal), P&S at qty≥2
-    var show2 = (isSolo && qty === 2) || (isDuo && qty >= 2);
-
-    // Color 1 label
-    if (isSolo && qty === 2) {
-      c1Label.innerHTML = 'Couleur du 1er sac <span style="color:var(--gold-dark)">*</span>';
-    } else if (isSolo) {
-      c1Label.innerHTML = 'Couleur de votre sac <span style="color:var(--gold-dark)">*</span>';
-    } else if (isDuo && qty >= 2) {
-      c1Label.innerHTML = 'Couleur de l\'ensemble 1 <span style="color:var(--gold-dark)">*</span>';
-    } else {
-      c1Label.innerHTML = 'Couleur de votre ensemble (sac + chapeau) <span style="color:var(--gold-dark)">*</span>';
-    }
-
-    // Color 2 label
-    if (isSolo && qty === 2) {
-      c2Label.innerHTML = 'Couleur du 2ème sac <span style="color:var(--gold-dark)">*</span>';
-    } else if (isDuo && qty >= 2) {
-      c2Label.innerHTML = 'Couleur de l\'ensemble 2 <span style="color:var(--gold-dark)">*</span>';
-    }
+    c1Label.innerHTML = show2
+      ? 'Couleur de l\'ensemble 1 <span style="color:var(--gold-dark)">*</span>'
+      : 'Couleur de votre ensemble (sac + chapeau) <span style="color:var(--gold-dark)">*</span>';
+    if (show2) c2Label.innerHTML = 'Couleur de l\'ensemble 2 <span style="color:var(--gold-dark)">*</span>';
 
     c2Group.style.display = show2 ? 'block' : 'none';
-    // Stepper always visible — no more bundle locking
     document.getElementById('qty-group').style.display = '';
   }
-  document.querySelectorAll('input[name="pack"]').forEach(function(r) {
-    r.addEventListener('change', updateColorPickers);
-  });
   updateColorPickers(); // init on load
 
-  // ─── PACK SELECTION FROM CARDS ───
-  function selectPack(pack, price) {
-    const map = { solo: 'pack-solo', duo: 'pack-duo' };
-    const radio = document.getElementById(map[pack]);
-    if (radio) {
-      radio.checked = true;
-      updateColorPickers();
-      document.getElementById('commander').scrollIntoView({ behavior: 'smooth' });
-    }
+  // ─── PACK CARD SELECTION ───
+  function selectPackVariant(colorValue) {
+    // Highlight selected card
+    document.querySelectorAll('.pack-card').forEach(function(c) { c.classList.remove('selected'); });
+    var card = document.querySelector('.pack-card[data-color="' + colorValue + '"]');
+    if (card) card.classList.add('selected');
+    // Pre-select matching color radio in form
+    var radio = document.querySelector('input[name="color"][value="' + colorValue + '"]');
+    if (radio) radio.checked = true;
+    updateColorPickers();
+    document.getElementById('commander').scrollIntoView({ behavior: 'smooth' });
   }
 
   // ─── QUANTITY ───
@@ -1416,10 +1435,9 @@
     const couleur2        = color2Group.style.display !== 'none'
                             ? document.querySelector('input[name="color2"]:checked').value
                             : '';
-    const quantite        = parseInt(document.getElementById('qty').value, 10);
-    const isSoloDiscount  = packEl.id === 'pack-solo' && quantite === 2;
-    const total           = isSoloDiscount ? 329 : price * quantite;
-    const packLabel       = isSoloDiscount ? 'Pack Solo x2 – 329 DH (offre 2 sacs)' : packEl.value;
+    const quantite  = parseInt(document.getElementById('qty').value, 10);
+    const total     = price * quantite;
+    const packLabel = packEl.value;
     const nom         = document.getElementById('name').value.trim();
     const telephone   = document.getElementById('phone').value.trim();
     const ville       = getCityValue();
@@ -1506,10 +1524,11 @@
     document.getElementById('address').value = '';
     document.getElementById('qty').value = 1;
     document.getElementById('qty-group').style.display = '';
-    document.getElementById('pack-solo').checked = true;
+    document.getElementById('pack-duo').checked = true;
     document.getElementById('color-beige').checked = true;
     document.getElementById('color2-beige').checked = true;
     document.getElementById('color2-group').style.display = 'none';
+    document.querySelectorAll('.pack-card').forEach(function(c) { c.classList.remove('selected'); });
     resetCityToDropdown();
     updateColorPickers();
     ['name','phone','address'].forEach(function(f) { clearError(f, f+'-error'); });
@@ -1557,21 +1576,21 @@
 
   // ─── SOCIAL PROOF POPUP ───
   const spData = [
-    { name:'Fatima',   city:'Casablanca',   pack:'Pack Paille & Soleil',     mins:2  },
-    { name:'Khadija',  city:'Rabat',        pack:'Pack Solo',    mins:5  },
-    { name:'Nadia',    city:'Marrakech',    pack:'Pack Paille & Soleil',     mins:8  },
-    { name:'Zineb',    city:'Agadir',       pack:'Pack Paille & Soleil',     mins:1  },
-    { name:'Layla',    city:'Fès',          pack:'Pack Solo',    mins:12 },
-    { name:'Meryem',   city:'Tanger',       pack:'Pack Solo',    mins:3  },
-    { name:'Imane',    city:'Meknès',       pack:'Pack Paille & Soleil',     mins:7  },
-    { name:'Sara',     city:'Oujda',        pack:'Pack Solo',    mins:15 },
-    { name:'Houda',    city:'Kénitra',      pack:'Pack Paille & Soleil',     mins:4  },
-    { name:'Asmaa',    city:'Tétouan',      pack:'Pack Paille & Soleil',     mins:9  },
-    { name:'Loubna',   city:'El Jadida',    pack:'Pack Solo',    mins:6  },
-    { name:'Hajar',    city:'Béni Mellal',  pack:'Pack Solo',    mins:11 },
-    { name:'Soukaina', city:'Chefchaouen',  pack:'Pack Paille & Soleil',     mins:2  },
-    { name:'Widad',    city:'Essaouira',    pack:'Pack Solo',    mins:18 },
-    { name:'Hanane',   city:'Ouarzazate',   pack:'Pack Paille & Soleil',     mins:14 },
+    { name:'Fatima',   city:'Casablanca',   pack:'Pack Paille & Soleil – Sable & Noir',   mins:2  },
+    { name:'Khadija',  city:'Rabat',        pack:'Pack Paille & Soleil – Sable & Beige',  mins:5  },
+    { name:'Nadia',    city:'Marrakech',    pack:'Pack Paille & Soleil – Sable & Blanc',  mins:8  },
+    { name:'Zineb',    city:'Agadir',       pack:'Pack Paille & Soleil – Sable & Noir',   mins:1  },
+    { name:'Layla',    city:'Fès',          pack:'Pack Paille & Soleil – Sable & Beige',  mins:12 },
+    { name:'Meryem',   city:'Tanger',       pack:'Pack Paille & Soleil – Sable & Blanc',  mins:3  },
+    { name:'Imane',    city:'Meknès',       pack:'Pack Paille & Soleil – Sable & Noir',   mins:7  },
+    { name:'Sara',     city:'Oujda',        pack:'Pack Paille & Soleil – Sable & Beige',  mins:15 },
+    { name:'Houda',    city:'Kénitra',      pack:'Pack Paille & Soleil – Sable & Blanc',  mins:4  },
+    { name:'Asmaa',    city:'Tétouan',      pack:'Pack Paille & Soleil – Sable & Noir',   mins:9  },
+    { name:'Loubna',   city:'El Jadida',    pack:'Pack Paille & Soleil – Sable & Beige',  mins:6  },
+    { name:'Hajar',    city:'Béni Mellal',  pack:'Pack Paille & Soleil – Sable & Blanc',  mins:11 },
+    { name:'Soukaina', city:'Chefchaouen',  pack:'Pack Paille & Soleil – Sable & Noir',   mins:2  },
+    { name:'Widad',    city:'Essaouira',    pack:'Pack Paille & Soleil – Sable & Beige',  mins:18 },
+    { name:'Hanane',   city:'Ouarzazate',   pack:'Pack Paille & Soleil – Sable & Blanc',  mins:14 },
   ];
   let spIndex = 0;
   let spDismissed = false;
@@ -1594,29 +1613,17 @@
     setTimeout(function() { spDismissed = false; }, 120000);
   }
 
-  // ─── PACK SOLO SLIDESHOW ───
-  (function() {
-    var slides = document.querySelectorAll('.solo-slide');
-    if (!slides.length) return;
+  // ─── PACK CARD SLIDESHOWS (one per card, 2s interval) ───
+  document.querySelectorAll('.pack-card').forEach(function(card) {
+    var slides = card.querySelectorAll('.pack-slide');
+    if (slides.length < 2) return;
     var current = 0;
     setInterval(function() {
       slides[current].classList.remove('is-active');
       current = (current + 1) % slides.length;
       slides[current].classList.add('is-active');
-    }, 3500);
-  })();
-
-  // ─── PACK DUO SLIDESHOW ───
-  (function() {
-    var slides = document.querySelectorAll('.duo-slide');
-    if (!slides.length) return;
-    var current = 0;
-    setInterval(function() {
-      slides[current].classList.remove('is-active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('is-active');
-    }, 3500);
-  })();
+    }, 2000);
+  });
 
 
 
