@@ -282,7 +282,7 @@
       padding: 4px 12px; border-radius: 100px;
     }
     .pack-slideshow { position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: #fff; }
-    .pack-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease; }
+    .pack-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease; }
     .pack-slide.is-active { opacity: 1; }
     .pack-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .pack-slide--product { background: #ffffff; }
@@ -716,7 +716,6 @@
 
 <!-- Packs Section -->
 <section class="packs" id="packs" aria-labelledby="packs-heading">
-  <p class="section-label">Nos Coloris</p>
   <h2 class="section-title" id="packs-heading">Pack Paille &amp; <span>Soleil</span></h2>
   <p class="section-desc">Sac + chapeau assortis, fabriqués à la main au Maroc — choisissez votre coloris préféré.</p>
 
@@ -1611,15 +1610,18 @@
     setTimeout(function() { spDismissed = false; }, 120000);
   }
 
-  // ─── PACK CARD SLIDESHOWS (one per card, 2s interval) ───
+  // ─── PACK CARD SLIDESHOWS (one per card, 2s display + 300ms staggered fade) ───
   document.querySelectorAll('.pack-card').forEach(function(card) {
     var slides = card.querySelectorAll('.pack-slide');
     if (slides.length < 2) return;
     var current = 0;
     setInterval(function() {
-      slides[current].classList.remove('is-active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('is-active');
+      var next = (current + 1) % slides.length;
+      slides[current].classList.remove('is-active');   // fade out current
+      setTimeout(function() {
+        slides[next].classList.add('is-active');        // fade in next only after current is gone
+        current = next;
+      }, 300); // matches CSS transition: opacity 0.3s
     }, 2000);
   });
 
