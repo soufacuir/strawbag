@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8">
@@ -265,14 +265,10 @@
     /* ─── PACKS ─── */
     .packs { background: var(--gold-pale); }
     .packs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(105px, 1fr));
-      gap: 12px;
+      display: grid; grid-template-columns: 1fr; gap: 24px;
       max-width: 1000px; margin: 0 auto;
-      overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
-      padding-bottom: 4px;
     }
-    .packs-grid::-webkit-scrollbar { display: none; }
+    @media (min-width: 640px) { .packs-grid { grid-template-columns: repeat(3, 1fr); } }
     .pack-card {
       background: var(--white); border-radius: var(--radius); overflow: hidden;
       box-shadow: var(--shadow); transition: var(--transition); position: relative;
@@ -284,20 +280,6 @@
       background: var(--gold); color: var(--brown);
       font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
       padding: 4px 12px; border-radius: 100px;
-    }
-    @media (max-width: 639px) {
-      .packs-grid { gap: 8px; }
-      .pack-slideshow { height: 110px; }
-      .pack-body { padding: 8px 8px 12px; }
-      .pack-name { font-size: 13px; }
-      .pack-variant { font-size: 10px; margin-bottom: 6px; }
-      .pack-includes { margin-bottom: 8px; gap: 3px; }
-      .pack-includes li { font-size: 10px; gap: 4px; }
-      .pack-price { margin-bottom: 8px; }
-      .pack-price-amount { font-size: 20px; }
-      .pack-price-currency { font-size: 11px; }
-      .pack-cta { font-size: 11px; padding: 8px 4px; letter-spacing: 0; }
-      .pack-badge { font-size: 7px; top: 6px; right: 6px; padding: 2px 6px; }
     }
     .pack-slideshow { position: relative; width: 100%; height: 240px; overflow: hidden; background: var(--sand); }
     .pack-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease; }
@@ -730,6 +712,102 @@
   </div>
 </div>
 
+<!-- Packs Section -->
+<section class="packs" id="packs" aria-labelledby="packs-heading">
+  <p class="section-label">Nos Coloris</p>
+  <h2 class="section-title" id="packs-heading">Pack Paille &amp; <span>Soleil</span></h2>
+  <p class="section-desc">Sac + chapeau assortis, fabriqués à la main au Maroc — choisissez votre coloris préféré.</p>
+
+  <div class="packs-grid">
+
+    <!-- Sable & Beige -->
+    <div class="pack-card" data-color="Sable &amp; Beige">
+      <div class="pack-slideshow" aria-hidden="true">
+        <div class="pack-slide is-active">
+          <img src="./images/pack-beige-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Beige – produit" loading="lazy" width="400" height="400">
+        </div>
+        <div class="pack-slide">
+          <img src="./images/pack-beige-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Beige – lifestyle" loading="lazy" width="400" height="400">
+        </div>
+      </div>
+      <div class="pack-body">
+        <div class="pack-name">Pack Paille &amp; Soleil</div>
+        <div class="pack-variant">Sable &amp; Beige</div>
+        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Beige">
+          <li>1 sac en paille artisanal</li>
+          <li>1 chapeau en paille assorti</li>
+          <li>Livraison gratuite</li>
+        </ul>
+        <div class="pack-price" aria-label="Prix : 249 dirhams">
+          <span class="pack-price-amount">249</span>
+          <span class="pack-price-currency">DH</span>
+        </div>
+        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Beige')" aria-label="Choisir le coloris Sable &amp; Beige à 249 DH">
+          Commander ce pack
+        </button>
+      </div>
+    </div>
+
+    <!-- Sable & Blanc -->
+    <div class="pack-card" data-color="Sable &amp; Blanc">
+      <div class="pack-slideshow" aria-hidden="true">
+        <div class="pack-slide is-active">
+          <img src="./images/pack-blanc-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc – produit" loading="lazy" width="400" height="400">
+        </div>
+        <div class="pack-slide">
+          <img src="./images/pack-blanc-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc – lifestyle" loading="lazy" width="400" height="400">
+        </div>
+      </div>
+      <div class="pack-body">
+        <div class="pack-name">Pack Paille &amp; Soleil</div>
+        <div class="pack-variant">Sable &amp; Blanc</div>
+        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Blanc">
+          <li>1 sac en paille artisanal</li>
+          <li>1 chapeau en paille assorti</li>
+          <li>Livraison gratuite</li>
+        </ul>
+        <div class="pack-price" aria-label="Prix : 249 dirhams">
+          <span class="pack-price-amount">249</span>
+          <span class="pack-price-currency">DH</span>
+        </div>
+        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Blanc')" aria-label="Choisir le coloris Sable &amp; Blanc à 249 DH">
+          Commander ce pack
+        </button>
+      </div>
+    </div>
+
+    <!-- Sable & Noir -->
+    <div class="pack-card" data-color="Sable &amp; Noir">
+      <span class="pack-badge">⭐ Best-seller</span>
+      <div class="pack-slideshow" aria-hidden="true">
+        <div class="pack-slide is-active">
+          <img src="./images/pack-noir-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Noir – produit" loading="lazy" width="400" height="400">
+        </div>
+        <div class="pack-slide">
+          <img src="./images/pack-noir-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Noir – lifestyle" loading="lazy" width="400" height="400">
+        </div>
+      </div>
+      <div class="pack-body">
+        <div class="pack-name">Pack Paille &amp; Soleil</div>
+        <div class="pack-variant">Sable &amp; Noir</div>
+        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Noir">
+          <li>1 sac en paille artisanal</li>
+          <li>1 chapeau en paille assorti</li>
+          <li>Livraison gratuite</li>
+        </ul>
+        <div class="pack-price" aria-label="Prix : 249 dirhams">
+          <span class="pack-price-amount">249</span>
+          <span class="pack-price-currency">DH</span>
+        </div>
+        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Noir')" aria-label="Choisir le coloris Sable &amp; Noir à 249 DH">
+          Commander ce pack
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- Order Form — placed high for mobile conversion -->
 <section class="order-section" id="commander" aria-labelledby="order-heading">
   <p class="section-label">Commander</p>
@@ -1003,102 +1081,6 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- Packs Section -->
-<section class="packs" id="packs" aria-labelledby="packs-heading">
-  <p class="section-label">Nos Coloris</p>
-  <h2 class="section-title" id="packs-heading">Pack Paille &amp; <span>Soleil</span></h2>
-  <p class="section-desc">Sac + chapeau assortis, fabriqués à la main au Maroc — choisissez votre coloris préféré.</p>
-
-  <div class="packs-grid">
-
-    <!-- Sable & Beige -->
-    <div class="pack-card" data-color="Sable &amp; Beige">
-      <div class="pack-slideshow" aria-hidden="true">
-        <div class="pack-slide is-active">
-          <img src="./images/pack-beige-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Beige – produit" loading="lazy" width="400" height="400">
-        </div>
-        <div class="pack-slide">
-          <img src="./images/pack-beige-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Beige – lifestyle" loading="lazy" width="400" height="400">
-        </div>
-      </div>
-      <div class="pack-body">
-        <div class="pack-name">Pack Paille &amp; Soleil</div>
-        <div class="pack-variant">Sable &amp; Beige</div>
-        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Beige">
-          <li>1 sac en paille artisanal</li>
-          <li>1 chapeau en paille assorti</li>
-          <li>Livraison gratuite</li>
-        </ul>
-        <div class="pack-price" aria-label="Prix : 249 dirhams">
-          <span class="pack-price-amount">249</span>
-          <span class="pack-price-currency">DH</span>
-        </div>
-        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Beige')" aria-label="Choisir le coloris Sable &amp; Beige à 249 DH">
-          Choisir ce coloris
-        </button>
-      </div>
-    </div>
-
-    <!-- Sable & Blanc -->
-    <div class="pack-card" data-color="Sable &amp; Blanc">
-      <div class="pack-slideshow" aria-hidden="true">
-        <div class="pack-slide is-active">
-          <img src="./images/pack-blanc-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc – produit" loading="lazy" width="400" height="400">
-        </div>
-        <div class="pack-slide">
-          <img src="./images/pack-blanc-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc – lifestyle" loading="lazy" width="400" height="400">
-        </div>
-      </div>
-      <div class="pack-body">
-        <div class="pack-name">Pack Paille &amp; Soleil</div>
-        <div class="pack-variant">Sable &amp; Blanc</div>
-        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Blanc">
-          <li>1 sac en paille artisanal</li>
-          <li>1 chapeau en paille assorti</li>
-          <li>Livraison gratuite</li>
-        </ul>
-        <div class="pack-price" aria-label="Prix : 249 dirhams">
-          <span class="pack-price-amount">249</span>
-          <span class="pack-price-currency">DH</span>
-        </div>
-        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Blanc')" aria-label="Choisir le coloris Sable &amp; Blanc à 249 DH">
-          Choisir ce coloris
-        </button>
-      </div>
-    </div>
-
-    <!-- Sable & Noir -->
-    <div class="pack-card" data-color="Sable &amp; Noir">
-      <span class="pack-badge">⭐ Best-seller</span>
-      <div class="pack-slideshow" aria-hidden="true">
-        <div class="pack-slide is-active">
-          <img src="./images/pack-noir-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Noir – produit" loading="lazy" width="400" height="400">
-        </div>
-        <div class="pack-slide">
-          <img src="./images/pack-noir-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Noir – lifestyle" loading="lazy" width="400" height="400">
-        </div>
-      </div>
-      <div class="pack-body">
-        <div class="pack-name">Pack Paille &amp; Soleil</div>
-        <div class="pack-variant">Sable &amp; Noir</div>
-        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Noir">
-          <li>1 sac en paille artisanal</li>
-          <li>1 chapeau en paille assorti</li>
-          <li>Livraison gratuite</li>
-        </ul>
-        <div class="pack-price" aria-label="Prix : 249 dirhams">
-          <span class="pack-price-amount">249</span>
-          <span class="pack-price-currency">DH</span>
-        </div>
-        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Noir')" aria-label="Choisir le coloris Sable &amp; Noir à 249 DH">
-          Choisir ce coloris
-        </button>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -1627,7 +1609,7 @@
     setTimeout(function() { spDismissed = false; }, 120000);
   }
 
-  // ─── PACK CARD SLIDESHOWS (one per card, 2s interval) ───
+  // ─── PACK CARD SLIDESHOWS (one per card, 3s interval) ───
   document.querySelectorAll('.pack-card').forEach(function(card) {
     var slides = card.querySelectorAll('.pack-slide');
     if (slides.length < 2) return;
@@ -1636,7 +1618,7 @@
       slides[current].classList.remove('is-active');
       current = (current + 1) % slides.length;
       slides[current].classList.add('is-active');
-    }, 2000);
+    }, 3000);
   });
 
 
