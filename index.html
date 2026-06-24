@@ -716,6 +716,7 @@
 
 <!-- Packs Section -->
 <section class="packs" id="packs" aria-labelledby="packs-heading">
+  <p class="section-label">COLLECTION ÉTÉ 2026</p>
   <h2 class="section-title" id="packs-heading">Pack Paille &amp; <span>Soleil</span></h2>
   <p class="section-desc">Sac + chapeau assortis, fabriqués à la main au Maroc — choisissez votre coloris préféré.</p>
 
@@ -723,6 +724,7 @@
 
     <!-- Sable & Beige -->
     <div class="pack-card" data-color="Sable &amp; Beige">
+      <span class="pack-badge">⭐ Best-seller</span>
       <div class="pack-slideshow" aria-hidden="true">
         <div class="pack-slide pack-slide--product is-active">
           <img src="./images/pack-beige-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Beige – produit" loading="lazy" width="400" height="400">
@@ -751,6 +753,7 @@
 
     <!-- Sable & Blanc Cassé -->
     <div class="pack-card" data-color="Sable &amp; Blanc Cassé">
+      <span class="pack-badge">⭐ Best-seller</span>
       <div class="pack-slideshow" aria-hidden="true">
         <div class="pack-slide pack-slide--product is-active">
           <img src="./images/pack-blanc-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Blanc Cassé – produit" loading="lazy" width="400" height="400">
@@ -1610,18 +1613,22 @@
     setTimeout(function() { spDismissed = false; }, 120000);
   }
 
-  // ─── PACK CARD SLIDESHOWS (one per card, 2s display + 300ms staggered fade) ───
+  // ─── PACK CARD SLIDESHOWS (sequential fade via transitionend, 2s interval) ───
   document.querySelectorAll('.pack-card').forEach(function(card) {
     var slides = card.querySelectorAll('.pack-slide');
     if (slides.length < 2) return;
     var current = 0;
     setInterval(function() {
+      var out = slides[current];
       var next = (current + 1) % slides.length;
-      slides[current].classList.remove('is-active');   // fade out current
-      setTimeout(function() {
-        slides[next].classList.add('is-active');        // fade in next only after current is gone
+      function onEnd(e) {
+        if (e.propertyName !== 'opacity') return;
+        out.removeEventListener('transitionend', onEnd);
+        slides[next].classList.add('is-active');
         current = next;
-      }, 300); // matches CSS transition: opacity 0.3s
+      }
+      out.addEventListener('transitionend', onEnd);
+      out.classList.remove('is-active');
     }, 2000);
   });
 
