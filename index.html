@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://connect.facebook.net">
   <link rel="dns-prefetch" href="https://analytics.tiktok.com">
-  <link rel="preload" as="image" href="./images/hero-1.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="./images/hero-2.webp" fetchpriority="high">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 
@@ -379,7 +379,6 @@
     .color-dot { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 2px 6px rgba(0,0,0,0.2); overflow: hidden; }
     .color-dot.sable-beige { background: linear-gradient(to right, #C4A67E 50%, #E8D5B0 50%); }
     .color-dot.sable-noir { background: linear-gradient(to right, #D4B896 50%, #1a1a1a 50%); }
-    .color-dot.beige-blanc { background: linear-gradient(to right, #D4B896 50%, #FFFFFF 50%); border: 2px solid var(--gold-light); }
     .color-option-text { font-size: 11px; font-weight: 600; color: var(--brown); }
 
     /* City switcher */
@@ -534,7 +533,6 @@
     .color-swatch { width: 68px; height: 68px; border-radius: 50%; box-shadow: var(--shadow); border: 4px solid var(--white); overflow: hidden; }
     .color-swatch.sable-beige { background: linear-gradient(to right, #C4A67E 50%, #E8D5B0 50%); }
     .color-swatch.sable-noir { background: linear-gradient(to right, #D4B896 50%, #1a1a1a 50%); }
-    .color-swatch.beige-blanc { background: linear-gradient(to right, #D4B896 50%, #FFFFFF 50%); border: 4px solid var(--gold-light); }
     .color-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; color: var(--brown); }
     .color-sub { font-size: 12px; color: var(--brown-mid); margin-top: -8px; }
 
@@ -641,10 +639,7 @@
     <source src="./assets/product-video.mp4" type="video/mp4">
   </video>
   <div class="hero-slide is-active" aria-hidden="true">
-    <img src="./images/hero-1.webp" alt="" fetchpriority="high" width="900" height="1125">
-  </div>
-  <div class="hero-slide" aria-hidden="true">
-    <img src="./images/hero-2.webp" alt="" loading="lazy" width="900" height="1125">
+    <img src="./images/hero-2.webp" alt="" fetchpriority="high" width="900" height="1125">
   </div>
   <div class="hero-slide" aria-hidden="true">
     <img src="./images/hero-3.webp" alt="" loading="lazy" width="900" height="1125">
@@ -754,35 +749,6 @@
       </div>
     </div>
 
-    <!-- Sable & Caramel -->
-    <div class="pack-card" data-color="Sable &amp; Caramel">
-      <span class="pack-badge">⭐ Best-seller</span>
-      <div class="pack-slideshow" aria-hidden="true">
-        <div class="pack-slide pack-slide--product is-active">
-          <img src="./images/pack-blanc-product.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Caramel – produit" loading="lazy" width="400" height="400">
-        </div>
-        <div class="pack-slide">
-          <img src="./images/pack-blanc-lifestyle.webp" alt="Pack Paille &amp; Soleil coloris Sable &amp; Caramel – lifestyle" loading="lazy" width="400" height="400">
-        </div>
-      </div>
-      <div class="pack-body">
-        <div class="pack-name">Pack Paille &amp; Soleil</div>
-        <div class="pack-variant">Sable &amp; Caramel</div>
-        <ul class="pack-includes" aria-label="Contenu du pack Sable &amp; Caramel">
-          <li>1 sac en paille artisanal</li>
-          <li>1 chapeau en paille assorti</li>
-          <li>Livraison gratuite</li>
-        </ul>
-        <div class="pack-price" aria-label="Prix : 249 dirhams">
-          <span class="pack-price-amount">249</span>
-          <span class="pack-price-currency">DH</span>
-        </div>
-        <button class="pack-cta" onclick="selectPackVariant('Sable &amp; Caramel')" aria-label="Choisir le coloris Sable &amp; Caramel à 249 DH">
-          Commander ce pack
-        </button>
-      </div>
-    </div>
-
     <!-- Sable & Noir -->
     <div class="pack-card" data-color="Sable &amp; Noir">
       <span class="pack-badge">⭐ Best-seller</span>
@@ -868,13 +834,6 @@
                 </label>
               </div>
               <div class="color-option">
-                <input type="radio" id="color-brown" name="color" value="Sable & Caramel">
-                <label class="color-option-label" for="color-brown">
-                  <div class="color-dot beige-blanc" aria-hidden="true"></div>
-                  <span class="color-option-text">Sable & Caramel</span>
-                </label>
-              </div>
-              <div class="color-option">
                 <input type="radio" id="color-noir" name="color" value="Sable & Noir">
                 <label class="color-option-label" for="color-noir">
                   <div class="color-dot sable-noir" aria-hidden="true"></div>
@@ -893,13 +852,6 @@
                 <label class="color-option-label" for="color2-beige">
                   <div class="color-dot sable-beige" aria-hidden="true"></div>
                   <span class="color-option-text">Sable & Blanc</span>
-                </label>
-              </div>
-              <div class="color-option">
-                <input type="radio" id="color2-brown" name="color2" value="Sable & Caramel">
-                <label class="color-option-label" for="color2-brown">
-                  <div class="color-dot beige-blanc" aria-hidden="true"></div>
-                  <span class="color-option-text">Sable & Caramel</span>
                 </label>
               </div>
               <div class="color-option">
@@ -1182,10 +1134,6 @@
     <div class="color-item" role="listitem">
       <div class="color-swatch sable-noir" aria-label="Coloris Sable & Noir"></div>
       <div class="color-name">Sable & Noir</div>
-    </div>
-    <div class="color-item" role="listitem">
-      <div class="color-swatch beige-blanc" aria-label="Coloris Sable & Caramel"></div>
-      <div class="color-name">Sable & Caramel</div>
     </div>
   </div>
 </section>
@@ -1581,19 +1529,19 @@
   const spData = [
     { name:'Fatima',   city:'Casablanca',   pack:'Pack Paille & Soleil – Sable & Noir',   mins:2  },
     { name:'Khadija',  city:'Rabat',        pack:'Pack Paille & Soleil – Sable & Blanc',  mins:5  },
-    { name:'Nadia',    city:'Marrakech',    pack:'Pack Paille & Soleil – Sable & Caramel',  mins:8  },
+    { name:'Nadia',    city:'Marrakech',    pack:'Pack Paille & Soleil – Sable & Noir',     mins:8  },
     { name:'Zineb',    city:'Agadir',       pack:'Pack Paille & Soleil – Sable & Noir',   mins:1  },
     { name:'Layla',    city:'Fès',          pack:'Pack Paille & Soleil – Sable & Blanc',  mins:12 },
-    { name:'Meryem',   city:'Tanger',       pack:'Pack Paille & Soleil – Sable & Caramel',  mins:3  },
+    { name:'Meryem',   city:'Tanger',       pack:'Pack Paille & Soleil – Sable & Blanc',    mins:3  },
     { name:'Imane',    city:'Meknès',       pack:'Pack Paille & Soleil – Sable & Noir',   mins:7  },
     { name:'Sara',     city:'Oujda',        pack:'Pack Paille & Soleil – Sable & Blanc',  mins:15 },
-    { name:'Houda',    city:'Kénitra',      pack:'Pack Paille & Soleil – Sable & Caramel',  mins:4  },
+    { name:'Houda',    city:'Kénitra',      pack:'Pack Paille & Soleil – Sable & Noir',     mins:4  },
     { name:'Asmaa',    city:'Tétouan',      pack:'Pack Paille & Soleil – Sable & Noir',   mins:9  },
     { name:'Loubna',   city:'El Jadida',    pack:'Pack Paille & Soleil – Sable & Blanc',  mins:6  },
-    { name:'Hajar',    city:'Béni Mellal',  pack:'Pack Paille & Soleil – Sable & Caramel',  mins:11 },
+    { name:'Hajar',    city:'Béni Mellal',  pack:'Pack Paille & Soleil – Sable & Blanc',    mins:11 },
     { name:'Soukaina', city:'Chefchaouen',  pack:'Pack Paille & Soleil – Sable & Noir',   mins:2  },
     { name:'Widad',    city:'Essaouira',    pack:'Pack Paille & Soleil – Sable & Blanc',  mins:18 },
-    { name:'Hanane',   city:'Ouarzazate',   pack:'Pack Paille & Soleil – Sable & Caramel',  mins:14 },
+    { name:'Hanane',   city:'Ouarzazate',   pack:'Pack Paille & Soleil – Sable & Noir',     mins:14 },
   ];
   let spIndex = 0;
   let spDismissed = false;
